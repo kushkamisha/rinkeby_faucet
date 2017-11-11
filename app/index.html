@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Rinkeby faucet</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <style>
+        #submit {
+            height: 45px;
+        }
+        input[type=text] {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Rinkeby Faucet</h1>
+
+        <div class="row input-address">
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="input-group">
+                    <input type="text" class="form-control input-lg" id="main-input" name="address" placeholder="Pleace put your wallet's address here">
+                    <div class="input-group-btn">
+                        <button type="button" id="giveMoney" class="btn btn-lg btn-success" onclick="giveMoney()">+1 Ether!</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="contract-balance">
+                Contract balance <span id="getContractBalance"></span> ETH
+            </div>
+            
+            <!-- Success -->
+            <div class="alert alert-success col-lg-6 col-lg-offset-3">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success! </strong><span></span>
+            </div>
+            <!-- Info -->
+            <div class="alert alert-info col-lg-6 col-lg-offset-3">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Info! </strong><span></span>
+            </div>
+            <!-- Warning -->
+            <div class="alert alert-warning col-lg-6 col-lg-offset-3">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Warning! </strong><span></span>
+            </div>
+            <!-- Danger -->
+            <div class="alert alert-danger col-lg-6 col-lg-offset-3">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Danger! </strong><span></span>
+            </div>
+        </div>
+
+        <div id="msg"></div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <!-- <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div> -->
+                    <div class="modal-body">
+                        <p></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Modal -->
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="myFooter">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 myCols">
+                    <h5>You can also replenish the main faucet's wallet</h5>
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm" name="send-address" placeholder="Pleace put your wallet's address here">
+                        <div class="input-group-btn dropup">
+                            <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose
+                            <span class="caret"></span></button>
+                            <ul id="dropdown-menu" class="dropdown-menu">
+                                <li><a href="" onclick="replenish(5)">5 Ether</a></li>
+                                <li><a href="" onclick="replenish(10)">10 Ether</a></li>
+                                <li><a href="" onclick="replenish(50)">50 Ether</a></li>
+                                <li class="input-group">
+                                    <input type="text" name="amount" class="form-control input-sm" placeholder="amount">
+                                    <span class="input-group-addon">ETH</span>
+                                    <div class="input-group-btn btn-group">
+                                        <button type="button" onclick="replenish(-1)" class="btn btn-sm btn-default">Send</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 myCols">
+                    <h5>How to use</h5>
+                    <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor neque vel diam placerat sodales. Phasellus pretium nulla sapien, sit amet placerat purus ultrices at. Curabitur ornare ullamcorper finibus. Nulla quam lacus, tincidunt ac felis at, ornare fringilla sem. Fusce lacinia facilisis pharetra. Etiam ut varius lorem, non blandit ipsum.</h6>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>© 2017 Kushka Misha </p>
+        </div>
+    </footer>
+    <!-- /FOOTER -->
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+<script src="app.js"></script>
+</html>

@@ -1,0 +1,115 @@
+#myFooter {
+  background-color: #373a48;
+  color:white;
+}
+
+#myFooter .footer-copyright{
+  background-color: #383737;
+  padding-top:3px;
+  padding-bottom:3px;
+  text-align: center;
+}
+
+#myFooter .footer-copyright p{
+  margin:10px;
+  color: #ccc;
+}
+
+#footer-ul{
+  list-style-type: none;
+    padding-left: 0;
+    line-height: 1.7;
+
+}
+
+#myFooter h5{
+  font-size: 18px;
+    color: white;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+#footer-ul li a {
+  color:#d2d1d1;
+  text-decoration: none;
+}
+
+#footer-ul li a :hover,
+#footer-ul li a :focus {
+  text-decoration: none;
+  color:white;
+}
+
+#myFooter .myCols {
+  text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+  #myFooter {
+    text-align: center;
+  }
+}
+
+
+#dropdown-menu {
+    width: 200px;
+    padding: 10px;
+}
+
+#dropdown-menu li {
+    text-align: center;
+}
+
+#contract-balance {
+    position: absolute;
+    width: 92%;
+    color: #878787;
+    top: 115%;   
+
+}
+
+.input-address {
+    position: absolute;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    top: 30%;
+}
+
+body h1 {
+    margin: 30px 50px;
+}
+
+.alert {
+    display: none;
+    position: absolute;
+    top: 400%;
+}
+
+
+/* CSS used for positioning the footers at the bottom of the page. */
+/* You can remove this. */
+
+
+html{
+  height: 100% !important;
+}
+
+body{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    height: 100%;
+}
+
+.content{
+  flex: 1 0 auto;
+  -webkit-flex: 1 0 auto;
+  min-height: 200px;
+}
+
+#myFooter{
+  flex: 0 0 auto;
+    -webkit-flex: 0 0 auto;
+}
