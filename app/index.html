@@ -51,31 +51,12 @@
             <!-- Danger -->
             <div class="alert alert-danger col-lg-6 col-lg-offset-3">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Danger! </strong><span></span>
+                <strong>Error! </strong><span></span>
             </div>
         </div>
-
-        <div id="msg"></div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <!-- <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Modal Header</h4>
-                    </div> -->
-                    <div class="modal-body">
-                        <p></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /Modal -->
     </div>
+
+    <div id="temp"></div>
 
     <!-- FOOTER -->
     <footer id="myFooter">
@@ -89,9 +70,9 @@
                             <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose
                             <span class="caret"></span></button>
                             <ul id="dropdown-menu" class="dropdown-menu">
-                                <li><a href="" onclick="replenish(5)">5 Ether</a></li>
-                                <li><a href="" onclick="replenish(10)">10 Ether</a></li>
-                                <li><a href="" onclick="replenish(50)">50 Ether</a></li>
+                                <li><button type="button" class="default-value" onclick="replenish(5)">5 Ether</button></li>
+                                <li><button type="button" class="default-value" onclick="replenish(10)">10 Ether</button></li>
+                                <li><button type="button" class="default-value" onclick="replenish(50)">50 Ether</button></li>
                                 <li class="input-group">
                                     <input type="text" name="amount" class="form-control input-sm" placeholder="amount">
                                     <span class="input-group-addon">ETH</span>

@@ -28,37 +28,28 @@ function getContractBalance() {
     });
 }
 
-function timeRemain() {
-    // let address = $("input[name=address]").val();
-    let address = '0x9eD53b5d4521cB05989Df7618A8e66FbFFCAe952';
-    Faucet.setProvider(web3.currentProvider); // important
+function canGetMoney() {
+    Faucet.setProvider(web3.currentProvider);
+    let amount = 0, val = 0;
     Faucet.deployed().then(function(contractInstance) {
-        contractInstance.timeRemain({from: address}).then(function(v) {
-           return Number(v);
+        contractInstance.getContractBalance.call().then(function(v) {
+            val = Number(v);
+            contractInstance.getAmount.call().then(function(a) {
+                amount = Number(a);
+                let address = $("input[name=address]").val();
+                // let address = '0x9eD53b5d4521cB05989Df7618A8e66FbFFCAe952';
+
+                contractInstance.timeRemain({from: address}).then(function(t) {
+                    if ((val > amount + 140000) && Number(t) == 0) {
+                        $("#temp").html('true');
+                    } else {
+                        $("#temp").html('false');
+                    }
+                });
+            });
         });
     });
 }
-
-// function canGetMoney() {
-//     Faucet.setProvider(web3.currentProvider);
-//     let amount = 0, val = 0, flag = false;
-//     Faucet.deployed().then(function(contractInstance) {
-//         contractInstance.getContractBalance.call().then(function(v) {
-//             val = Number(v);
-//             contractInstance.getAmount.call().then(function(a) {
-//                 amount = Number(a);
-//                 if (val > amount + 140000) {
-//                     alert('here');
-//                     flag = true;
-//                 }
-//                 alert(flag);
-//             });
-//         });
-    
-//     alert(flag);
-//     return false;
-//     });
-// }
 
 window.replenish = function(amount) {
     try {
@@ -66,17 +57,16 @@ window.replenish = function(amount) {
             amount = $("input[name=amount]").val();
             amount = amount.replace(',', '.');
             if (isNaN(parseFloat(amount))) {
-                alert('Incorrect repelnish amount!');
+                alertWindow(4, 'Incorrect repelnish amount!');
             }
         }
         amount = Number(amount);
-
+        // alert(amount);
         let address = $("input[name=send-address]").val();
 
-        $("#msg").html("Thank you for replenish faucet's wallet. The balance will increase as soon as the transaction is recorded on the blockchain. Please wait.");
+        alertWindow(1, "Thank you for replenish faucet's wallet. The balance will increase as soon as the transaction is recorded on the blockchain. Please wait.");
         Faucet.deployed().then(function(contractInstance) {
             contractInstance.replenish({from: address, value: web3.toWei(amount)}).then(function() {
-                $("#msg").html("");
                 getContractBalance();
             });
         });
@@ -86,18 +76,47 @@ window.replenish = function(amount) {
 }
 
 window.giveMoney = function() {
+    canGetMoney();
+    let can_get = ($("#temp").text() == 'true');
+    // let can_get = Boolean($("#temp").text());
+    // alert(can_get);
     try {
-        let address = $("input[name=address]").val();
-        $("#msg").html("We send some money to your address. When miners confirm this transaction you'll see refreshed balance.");
-        Faucet.deployed().then(function(contractInstance) {
-            contractInstance.giveMoney({gas: 140000, from: address}).then(function() {
-                $("#msg").html("");
-                getContractBalance();
+        if (can_get) {
+            let address = $("input[name=address]").val();
+            alertWindow(1, "We send some money to your address. When miners confirm this transaction you'll see refreshed balance.");
+            Faucet.deployed().then(function(contractInstance) {
+                contractInstance.giveMoney({gas: 140000, from: address}).then(function() {
+                    getContractBalance();
+                });
             });
-        });
+        } else {
+            alertWindow(3, 'You must wait ' + time_to_wait + ' seconds before receiving more money.');
+        }
     } catch (err) {
         console.log(err);
     }
+}
+
+function alertWindow(n, text) {
+    // switch(n) {
+    //     case 1:
+    //         $('.alert-success').css("display", "block");
+    //         $('.alert-success span').html(text);
+    //         break;
+    //     case 2:
+    //         $('.alert-info').css("display", "block");
+    //         $('.alert-info span').html(text);
+    //         break;
+    //     case 3:
+    //         $('.alert-warning').css("display", "block");
+    //         $('.alert-warning span').html(text);
+    //         break;
+    //     case 4:
+    //         $('.alert-danger').css("display", "block");
+    //         $('.alert-danger span').html(text);
+    //         break;
+    // }
+    alert(text);
 }
 
 $(document).ready(function() {
@@ -110,6 +129,6 @@ $(document).ready(function() {
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
     window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
   }
-  alert(timeRemain());
+  canGetMoney();
   getContractBalance();
 });
